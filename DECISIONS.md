@@ -7,12 +7,15 @@ An unanswered question gives 0 points.
 ## 1. A rule you moved
 Pick one business rule (R1–R8). In which file did it live in the starter and in which file does it live now? Why there?
 
-_(your answer here)_
+La început se face în BookingService.Create, din folderul Services. Acum am mutat regula in domeniu, mai exact în metoda Booking.Overlaps din fișierul Domain/Bookings/Booking.cs. Tot acolo am pus si anularea rezervarii în metoda Booking.Cancel.
+
 
 ## 2. Result instead of an exception
 Why is `Result` a better choice than an exception for "the room is occupied"? What happens in your code when an `Error` is returned?
 
-_(your answer here)_
+Pentru situația în care camera este ocupată, o exceptie ar fi folosită doar pentru a semnala o eroare, chiar daca aceasta este o situație prevăzută de aplicație. Eu am folosit Result<Booking> și Error.Conflict.
+
+În momentul în care handler-ul primește o eroare, nu oprește aplicația cu o exceptie. El returnează eroarea mai departe, iar ResultHttpExtensions o transforma într-un răspuns HTTP 409 și un ProblemDetails.
 
 ## 3. Who knows about EF Core?
 Which classes in your project know about EF Core and which do not? What do you gain and what do you pay with Repository + Unit of Work?
